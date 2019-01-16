@@ -71,7 +71,6 @@ for e in part2:
 		i +=1
 	authors2.append(e[0:i-1])
 	line_count.append(e[28:31])
-
 ## Analyse DATA :
 # Convert commitCount string elements into int :
 changes = [float(i) for i in changes]
@@ -80,22 +79,29 @@ insertions = [int(i) for i in insertions]
 deletions = [int(i) for i in deletions]
 line_count = [int(i) for i in line_count]
 
-
-x = 0
-for i in range(1, line_count.index(max(line_count))+1):
-	x = x + line_count[i]
-angle_line_count = float(x + max(line_count)/4)/float(sum(line_count))*360
-x = 0
-max_index_change = 0
-for i in range(len(changes)):
-	if(changes[max_index_change] < changes[i]):
-		max_index_change = i
-for i in range(1, max_index_change+1):
-	x = x + line_count[i]
-# print('curent=', angle_line_count)
-angle_changes = float(x)
-# print("angle_changes=")
-# print(angle_changes)
+#sorting :
+for i in range(1, len(authors)-1):
+	if ((authors[i] in authors2)):
+		i2 = authors2.index(authors[i])
+		temp = authors[i]
+		authors[i] = authors[i2]
+		authors[i2] = temp
+		temp = changes[i]
+		changes[i] = changes[i2]
+		changes[i2] = temp
+		temp = commitCount[i]
+		commitCount[i] = commitCount[i2]
+		commitCount[i2] = temp
+		temp = insertions[i]
+		insertions[i] = insertions[i2]
+		insertions[i2] = temp
+		temp = deletions[i]
+		deletions[i] = deletions[i2]
+		deletions[i2] = temp
+		# temp = line_count[i]
+		# line_count[i] = line_count[i2]
+		# line_count[i2] = temp
+# prepare graph :
 ind = range(1, len(authors)+1)
 color_tab = ['#59eb50','#fe8e00', '#00cc99', 'purple', '#af8eae', '#ef1056', '#3c42fc','#059b74', '#cc6600', '#cc0066','#993300' ,'b','c','y','r','g']
 width = 0.8
@@ -112,7 +118,7 @@ axarr[0,0].pie(changes, labels=authors, autopct='%1.1f%%', shadow=True,
 
 axarr[0,1].set_title('Number of rows in current revision :', fontsize=16)
 axarr[0,1].pie(line_count, labels=authors2, autopct='%1.1f%%', shadow=True,
-				   radius=0.9, startangle=90+angle_line_count, colors=color_tab)
+				   radius=0.9, startangle=0, colors=color_tab)
 
 axarr[1,0].set_title('Number of commit', fontsize=18)
 bars = axarr[1,0].bar(ind,  commitCount, width, align='center', color=color_tab)
