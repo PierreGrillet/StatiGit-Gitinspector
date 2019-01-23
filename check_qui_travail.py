@@ -21,7 +21,7 @@ line_count = []
 changes = []
 
 print('Reading File...')
-file = open('./result.txt','r')
+file = open('/bin/result.txt','r')
 k = 0
 bin.append(file.readline())
 while (bin[k][0:6] != 'Author' and k<max_iterate):
@@ -70,7 +70,7 @@ for e in part2:
 			k += 1
 		i +=1
 	authors2.append(e[0:i-1])
-	line_count.append(e[28:31])
+	line_count.append(e[26:31])
 ## Analyse DATA :
 # Convert commitCount string elements into int :
 changes = [float(i) for i in changes]
