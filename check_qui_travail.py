@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # import os
+from os.path import expanduser
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import font_manager as fm, rcParams
@@ -21,7 +22,7 @@ line_count = []
 changes = []
 
 print('Reading File...')
-file = open('/bin/result.txt','r')
+file = open(expanduser('~/bin/result.txt'),'r')
 k = 0
 bin.append(file.readline())
 while (bin[k][0:6] != 'Author' and k<max_iterate):
